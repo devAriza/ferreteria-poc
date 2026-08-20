@@ -49,7 +49,14 @@ def get_recommendations(
     product_id: str,
     tienda_id: str,
     top_k: int = TOP_K_RECOMMENDATIONS,
+    allowed_sources: set[str] | None = None,
 ) -> list[dict]:
+    """
+    allowed_sources: si se pasa (ej. {"rules", "llm"} o {"cooccurrence"}),
+    restringe qué señales participan en el score combinado. Se usa desde
+    scripts/evaluate_recommendations.py para comparar el motor combinado
+    contra cada señal aislada (ablation study), no se usa en producción.
+    """
     anchor = db.query(Product).filter(Product.product_id == product_id).first()
     if anchor is None:
         raise ValueError(f"Producto {product_id} no existe")
@@ -71,6 +78,8 @@ def get_recommendations(
     by_candidate: dict[str, dict[str, tuple[float, str]]] = defaultdict(dict)
 
     for rel in relations:
+        if allowed_sources is not None and rel.source not in allowed_sources:
+            continue
         other = rel.product_b if rel.product_a == product_id else rel.product_a
         if other == product_id:
             continue
