@@ -1,0 +1,56 @@
+product_id,nombre,categoria,material,uso_recomendado,precio,unidad,stock_disponible
+P001,"Tubo PVC hidráulico 1/2"" x 6m",Plomería,PVC,"Conducción de agua fría, instalaciones domésticas",145.0,pieza,40
+P002,"Tubo PVC hidráulico 3/4"" x 6m",Plomería,PVC,"Conducción de agua fría, instalaciones domésticas",180.0,pieza,35
+P003,"Codo PVC 90° 1/2""",Plomería,PVC,Cambio de dirección en tubería hidráulica,8.5,pieza,120
+P004,"Coples PVC 1/2""",Plomería,PVC,Unión de tramos de tubería PVC,6.0,pieza,150
+P005,Pegamento PVC 118ml,Plomería,Solvente/PVC,Sellado y unión permanente de tubería PVC,65.0,pieza,60
+P006,"Cinta teflón 1/2"" x 10m",Plomería,PTFE,Sellado de roscas en conexiones de agua y gas,12.0,pieza,200
+P007,"Llave de paso PVC 1/2""",Plomería,PVC/Latón,Corte de flujo de agua en instalación doméstica,95.0,pieza,45
+P008,Regadera sencilla ABS,Plomería,ABS,"Instalación de baño, uso doméstico",180.0,pieza,25
+P009,Manguera flexible para WC 30cm,Plomería,Acero inoxidable/PVC,Conexión de tinaco o tanque de baño,85.0,pieza,30
+P010,Flotador para tinaco,Plomería,Plástico ABS,Control de nivel de agua en tinacos,120.0,pieza,18
+P011,Cemento gris 50kg,Construcción,Cemento Portland,"Obra gris, fijación de tubería enterrada, bases",210.0,saco,50
+P012,Impermeabilizante acrílico 19L,Construcción,Acrílico,Protección de techos y azoteas contra filtraciones,980.0,cubeta,15
+P013,"Brocha para impermeabilizante 4""",Herramientas,Cerdas sintéticas,Aplicación de impermeabilizante y selladores,45.0,pieza,40
+P020,"Tornillo autorroscante 1"" acero estándar (100pz)",Tornillería,Acero al carbón,"Fijación general en interiores, no expuesto a intemperie",55.0,bolsa,70
+P021,"Tornillo autorroscante 1"" galvanizado (100pz)",Tornillería,Acero galvanizado,Fijación en exteriores y zonas de humedad moderada,85.0,bolsa,55
+P022,"Tornillo autorroscante 1"" acero inoxidable (100pz)",Tornillería,Acero inoxidable 304,"Fijación en exteriores costeros, alta resistencia a corrosión salina",150.0,bolsa,30
+P023,"Taquete de plástico 1/4"" (100pz)",Tornillería,Nylon/PVC,Anclaje de tornillos en concreto y tabique,40.0,bolsa,90
+P024,"Taquete metálico expansión 3/8""",Tornillería,Acero zincado,Anclaje de cargas pesadas en concreto,6.0,pieza,100
+P025,"Tuerca hexagonal 1/4"" galvanizada (50pz)",Tornillería,Acero galvanizado,Sujeción en estructuras metálicas exteriores,35.0,bolsa,45
+P026,"Clavo para concreto 2"" (1kg)",Tornillería,Acero endurecido,Fijación directa en concreto y block,65.0,kg,40
+P027,Bisagra de piso acero inoxidable,Herrajes,Acero inoxidable 304,Puertas de vidrio y exteriores costeros,320.0,pieza,12
+P028,Bisagra de piso acero estándar,Herrajes,Acero al carbón,"Puertas interiores, bajo uso",180.0,pieza,18
+P029,Candado 40mm acero estándar,Seguridad,Acero al carbón,"Uso interior, bodegas techadas",95.0,pieza,25
+P030,Candado 40mm acero inoxidable,Seguridad,Acero inoxidable,"Exteriores, alta humedad, zonas costeras",180.0,pieza,15
+P040,Cable THW cal.12 (rollo 100m),Eléctrico,Cobre/PVC,Instalación eléctrica residencial entubada,1450.0,rollo,12
+P041,Contacto doble polarizado,Eléctrico,Termoplástico/cobre,Instalación de tomacorrientes en interiores,35.0,pieza,80
+P042,Apagador sencillo,Eléctrico,Termoplástico,Control de encendido de iluminación interior,28.0,pieza,75
+P043,"Cinta aislante 3/4"" x 20m",Eléctrico,PVC,Aislamiento de empalmes eléctricos,18.0,pieza,100
+P044,Caja octagonal galvanizada,Eléctrico,Acero galvanizado,Alojamiento de conexiones de lámparas y ventiladores,22.0,pieza,60
+P045,Foco LED 9W luz cálida,Eléctrico,Aluminio/plástico,Iluminación interior residencial,45.0,pieza,90
+P046,Lámpara exterior LED IP65,Eléctrico,Aluminio/policarbonato,Iluminación exterior resistente a lluvia y humedad,280.0,pieza,20
+P047,Extensión eléctrica 5m,Eléctrico,Cobre/PVC,Uso doméstico general,95.0,pieza,35
+P048,Pastilla termomagnética 20A,Eléctrico,Termoplástico/cobre,Protección de circuitos en centro de carga,180.0,pieza,25
+P060,Pintura vinílica blanca 19L,Pintura,Vinil-acrílico,"Interiores y exteriores, acabado mate",850.0,cubeta,20
+P061,Esmalte anticorrosivo 1L,Pintura,Alquidálico,"Protección de superficies metálicas contra oxidación, exteriores",165.0,pieza,30
+P062,Sellador para exteriores 4L,Pintura,Acrílico,Preparación de muros expuestos a humedad antes de pintar,320.0,cubeta,15
+P063,"Rodillo para pintura 9""",Herramientas,Espuma/felpa,Aplicación de pintura vinílica en muros,45.0,pieza,50
+P064,"Brocha 3"" cerdas sintéticas",Herramientas,Cerdas sintéticas,Pintura de detalle y esmaltes,38.0,pieza,55
+P065,Lija de agua grano 220 (paquete 5pz),Pintura,Óxido de aluminio,Preparación de superficie antes de pintar,30.0,paquete,40
+P066,Thinner estándar 1L,Pintura,Solvente,Dilución de esmaltes y limpieza de brochas,55.0,pieza,45
+P080,Manguera para jardín 15m,Jardín,PVC reforzado,Riego de jardín y lavado de exteriores,280.0,pieza,22
+P081,Aspersor giratorio,Jardín,Plástico ABS/latón,Riego automático de áreas verdes,65.0,pieza,30
+P082,Conector rápido para manguera,Jardín,Latón,Acople rápido de manguera a llave de jardín,25.0,pieza,50
+P083,Guantes de carnaza,Seguridad,Carnaza/algodón,Protección en trabajos de jardinería y construcción,65.0,par,60
+P084,Costal de block hueco 15cm,Construcción,Concreto,Construcción de muros y bardas,18.0,pieza,200
+P085,Malla ciclónica galvanizada 1m x 20m,Construcción,Acero galvanizado,"Cercado perimetral, resistente a intemperie",980.0,rollo,8
+P086,Malla ciclónica acero estándar 1m x 20m,Construcción,Acero al carbón,Cercado perimetral en interiores/patios techados,650.0,rollo,10
+P100,"Taladro percutor 1/2"" 650W",Herramientas,Metal/plástico ABS,"Perforación en concreto, madera y metal",1250.0,pieza,15
+P101,"Broca para concreto 1/4""",Herramientas,Carburo de tungsteno,Perforación en concreto y tabique,35.0,pieza,70
+P102,"Broca para concreto 3/8""",Herramientas,Carburo de tungsteno,Perforación en concreto y tabique para taquetes de expansión,45.0,pieza,60
+P103,Martillo de uña 16oz,Herramientas,Acero forjado/madera,"Uso general, fijación de clavos",120.0,pieza,30
+P104,Desarmador plano/cruz set 6pz,Herramientas,Acero cromado,Uso general en instalaciones eléctricas y ensamblado,95.0,set,40
+P105,"Llave inglesa 10""",Herramientas,Acero al cromo vanadio,Ajuste de tuercas y conexiones de plomería,145.0,pieza,25
+P106,Cinta métrica 5m,Herramientas,Acero/ABS,Medición general en obra e instalación,55.0,pieza,45
+P107,Nivel de burbuja 60cm,Herramientas,Aluminio,Verificación de horizontalidad en instalaciones,165.0,pieza,20
