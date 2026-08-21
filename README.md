@@ -14,9 +14,8 @@ qué más llevar dado un producto y una tienda.
 
 ```bash
 cd backend
-python3 -m venv venv && source venv/bin/activate    # opcional pero recomendado
+python -m venv venv
 pip install -r requirements.txt
-cp .env.example .env                                 # ajusta si hace falta
 uvicorn app.main:app --reload --port 8000
 ```
 
