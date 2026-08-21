@@ -1,32 +1,11 @@
 """
 Motor de extracción de relaciones vía LLM (Google Gemini, API gratuita).
 
-Este es el bloque que resuelve lo que el brief señala como el punto ciego
-de cualquier motor puramente estadístico: relaciones funcionales que casi
-no aparecen en el historial de ventas (ej. tubo + pegamento PVC, con solo
-1.5% de co-ocurrencia real en nuestro dataset a pesar de que uno siempre
-necesita al otro) y contexto ambiental (clima costero vs interior) que no
-está en `sales.csv` en absoluto.
-
 Diseño:
-- Se le manda al modelo el catálogo (o un subconjunto por categoría, para no
-  saturar el contexto) con product_id, categoria, material, uso_recomendado.
-- Se le pide EXCLUSIVAMENTE JSON: lista de {product_a, product_b, score,
-  explicacion}. Nada de texto libre alrededor, para poder parsear sin
-  ambigüedad.
-- El resultado se cachea en la tabla `product_relations` con source='llm',
-  para no volver a llamar a la API en cada request de recomendación
-  (llamar al LLM es un paso de "enriquecimiento offline" del catálogo, no
-  algo que corre en el hot path de una recomendación individual).
+- Se le manda al modelo el catálogo (o un subconjunto por categoría, para no saturar el contexto) con product_id, categoria, material, uso_recomendado.
+- Se le pide EXCLUSIVAMENTE JSON: lista de {product_a, product_b, score, explicacion}. Nada de texto libre alrededor, para poder parsear sin ambigüedad.
+- El resultado se cachea en la tabla `product_relations` con source='llm', para no volver a llamar a la API en cada request de recomendación (llamar al LLM es un paso de "enriquecimiento offline" del catálogo, no algo que corre en el hot path de una recomendación individual).
 
-IMPORTANTE (transparencia sobre el estado de esto en la entrega):
-No pude ejecutar llamadas reales a la API de Gemini desde el sandbox donde
-construí este proyecto (su red de salida solo permite pypi/npm/github/
-api.anthropic.com). El código de este archivo está completo y lo puedes
-probar en tu máquina con tu propia GEMINI_API_KEY (ver backend/.env.example
-y README.md). Si GEMINI_API_KEY no está configurada, `enrich_catalog_with_llm`
-simplemente no hace nada y el sistema sigue funcionando con rules_engine +
-cooccurrence (degradación explícita, no falla silenciosa a medias).
 """
 import json
 import re
@@ -72,8 +51,7 @@ def _build_user_prompt(products: list[dict]) -> str:
 
 
 def _extract_json_array(text: str) -> list:
-    """Gemini a veces envuelve la respuesta en ```json ... ``` a pesar de la instrucción.
-    Esto la limpia antes de parsear."""
+
     cleaned = re.sub(r"^```json\s*|\s*```$", "", text.strip())
     match = re.search(r"\[.*\]", cleaned, re.DOTALL)
     if not match:
@@ -82,14 +60,7 @@ def _extract_json_array(text: str) -> list:
 
 
 def call_gemini_for_relations(products: list[dict], timeout: float = 60.0) -> list[dict]:
-    """
-    products: lista de dicts con product_id, categoria, material, uso_recomendado.
-    Devuelve: [{"product_a", "product_b", "score", "explanation"}, ...]
 
-    Lanza RuntimeError si GEMINI_API_KEY no está configurada, o la excepción
-    original de httpx si la llamada falla (se deja propagar a propósito para
-    que el caller decida cómo loggearlo, en vez de tragarse el error).
-    """
     if not GEMINI_API_KEY:
         raise RuntimeError(
             "GEMINI_API_KEY no está configurada. Define la variable de entorno "
@@ -105,10 +76,12 @@ def call_gemini_for_relations(products: list[dict], timeout: float = 60.0) -> li
         },
     }
 
+    headers = {"Content-Type": "application/json", "X-goog-api-key": GEMINI_API_KEY}
+
     with httpx.Client(timeout=timeout) as client:
         response = client.post(
             GEMINI_API_URL,
-            params={"key": GEMINI_API_KEY},
+            headers=headers,
             json=payload,
         )
         response.raise_for_status()
@@ -127,21 +100,14 @@ def call_gemini_for_relations(products: list[dict], timeout: float = 60.0) -> li
                 "explanation": r.get("explicacion") or r.get("explanation") or "",
             })
         except (KeyError, ValueError, TypeError):
-            continue  # ignora entradas mal formadas en vez de tumbar todo el batch
+            continue
 
     return relations
 
 
 def enrich_catalog_by_category(products_by_category: dict[str, list[dict]]) -> list[dict]:
     """
-    Llama a Gemini una vez POR CATEGORÍA en vez de mandar las 55+ filas del
-    catálogo en un solo prompt. Con un catálogo real de miles de SKUs esto es
-    obligatorio por límite de contexto y de costo; aquí con 55 productos ya
-    se hace así desde el inicio para que el patrón escale sin refactor.
-
-    Además, cruza cada categoría con las 2 categorías más relacionadas
-    (ver rules_engine.PROJECT_CATEGORY_LINKS) para no perder relaciones
-    inter-categoría como "tubo (Plomería) + llave inglesa (Herramientas)".
+    Llama a Gemini una vez POR CATEGORÍA en vez de mandar las 55+ filas del catálogo en un solo prompt.
     """
     from app.services.rules_engine import PROJECT_CATEGORY_LINKS
 
@@ -165,8 +131,7 @@ def enrich_catalog_by_category(products_by_category: dict[str, list[dict]]) -> l
             relations = call_gemini_for_relations(batch)
             all_relations.extend(relations)
         except Exception as e:
-            # No tumbamos todo el enriquecimiento si UNA categoría falla
-            # (rate limit, timeout, etc.) - se loggea y se sigue.
+
             print(f"[llm_client] Aviso: falló enriquecimiento de categoría '{cat}': {e}")
             continue
 
