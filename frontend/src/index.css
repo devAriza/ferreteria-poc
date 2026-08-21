@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/*
+  Sistema de diseño: "señalética de ferretería".
+  - Grafito + papel gris frío en vez del cream/serif genérico.
+  - Naranja de seguridad como único acento (el color de las etiquetas de
+    anaquel y la cinta de precaución, no un accent decorativo cualquiera).
+  - IBM Plex Mono para todo lo que es un dato que alguien va a leer con
+    precisión: SKU, precio, stock. IBM Plex Sans para todo lo demás.
+*/
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --color-paper: #eceae4;
+  --color-paper-dim: #e1ded5;
+  --color-ink: #1c1b19;
+  --color-ink-soft: #4a4844;
+  --color-steel: #6b7280;
+  --color-steel-line: #c9c6bc;
+  --color-safety: #e8590c;
+  --color-safety-dim: #fde9dc;
+  --color-ok: #2f7a4f;
+  --color-ok-dim: #e3f1e8;
+  --color-danger: #c53030;
+  --color-danger-dim: #fbe4e4;
+  --color-navy: #14213d;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Textura sutil tipo papel/concreto, no una imagen, solo ruido CSS barato */
+.paper-texture {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(28,27,25,0.035) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+
+/* --- Firma visual: tarjeta tipo "ticket de anaquel" --- */
+.shelf-ticket {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--color-steel-line);
+}
+.shelf-ticket::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 14px;
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-steel-line);
+}
+.shelf-ticket-perf {
+  border-top: 1.5px dashed var(--color-steel-line);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-steel);
+}
+
+::selection {
+  background: var(--color-safety);
+  color: white;
+}

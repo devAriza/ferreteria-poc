@@ -18,7 +18,9 @@ backend/.env
 node_modules/
 frontend/.next/
 frontend/out/
+frontend/dist/
 frontend/.env.local
+frontend/.env
 
 # OS
 .DS_Store
